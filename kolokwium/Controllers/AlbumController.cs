@@ -1,4 +1,4 @@
-﻿using kolokwium.Models;
+using kolokwium.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -23,8 +23,7 @@ namespace kolokwium.Controllers
         [HttpGet]
         public IActionResult GetAlbum(int IdAlbum) 
         {
-            var Album = _context.Album.Where(i => i.IdAlbum == IdAlbum).Include(i => i.Tracks);
-            return Ok(Album);
+            return Ok(_context.Album.Where(i => i.IdAlbum == IdAlbum).Include(i => i.Tracks.OrderBy(i=>i.Duration)));
         }
 
     }
