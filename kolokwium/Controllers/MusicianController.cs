@@ -25,7 +25,7 @@ namespace kolokwium.Controllers
         public IActionResult DeleteMusician(int IdMusician)
         {
 
-            int IdMusiciana = _context.Musician.Select(c=>c.IdMusician)
+            //int IdMusiciana = _context.Musician.Select(c=>c.IdMusician)
             return Ok();
         }
 
