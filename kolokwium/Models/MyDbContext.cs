@@ -1,4 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -46,6 +46,7 @@ namespace kolokwium.Models
                 p.HasOne(e => e.Musician).WithMany(e => e.Musician_Tracks).HasForeignKey(e => e.IdMusician);
                 p.HasOne(e => e.Track).WithMany(e => e.Musician_Tracks).HasForeignKey(e => e.IdTrack);
                 p.HasData(new Musician_Track { IdMusician = 1, IdTrack = 1 });
+                p.HasData(new Musician_Track { IdMusician = 2, IdTrack = 2 });
             });
 
             modelBuilder.Entity<Track>(p =>
@@ -53,9 +54,10 @@ namespace kolokwium.Models
                 p.HasKey(e => e.IdTrack);
                 p.Property(e => e.TrackName).IsRequired().HasMaxLength(20);
                 p.Property(e => e.Duration).IsRequired();
-                p.HasOne(e => e.Album).WithMany(e => e.Tracks).HasForeignKey(e => e.IdAlbum);
+                p.HasOne(e => e.Album).WithMany(e => e.Tracks).HasForeignKey(e => e.IdAlbum).IsRequired(false);
 
                 p.HasData(new Track { IdTrack = 1, TrackName = "Wlazl kotek", Duration = 5, IdAlbum = 1});
+                p.HasData(new Track { IdTrack = 2, TrackName = "Koszmar", Duration = 2, IdAlbum = 1});
             });
 
             modelBuilder.Entity<Album>(p =>
